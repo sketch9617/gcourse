@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: guli-oss
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  profiles:
+    # 如果不配置 logback-spring.xml中的  dev的日志配置不能生效
+    active: dev
+  servlet:
+    multipart:
+      max-file-size: 50MB   # 一次请求单个表单项上传的文件大小限制
+      max-request-size: 100MB  # 一次请求多个表单项上传文件总大小限制
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+  redis:
+    host: 192.168.1.170
+    port: 6379
+#        namespace:
+#    name:
+server:
+  port: 8120
+aliyun:
+  oss:
+    endpoint: "https://oss-cn-chengdu.aliyuncs.com"
+    accessKeyId: LTAI5tDaEmk7jmQwbvpDgQeS
+    accessKeySecret: Tlvngst9OxoXRSDq4iWAjapnk2BXPp
+    bucketName: xa220310-guli

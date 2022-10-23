@@ -1,0 +1,61 @@
+server:
+  port: 9110
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    nacos:
+      discovery:
+        service: localhost:8848
+#    gateway:   由于以后不同的服务的路由要配置不同的filter过滤，所以不使用自动生成路由
+#      discovery:
+#        locator:
+#          # 自动生成的路由会使用注册中心中的 服务名 当做路径前缀拼接
+#          # http://localhost:9110/guli-cms/api/cms/ad
+#          enabled: true
+    gateway:
+      routes:
+        # -表示创建一个集合中的元素
+        - id: service-edu
+          # uri表示目标服务器地址：
+          uri: lb://guli-edu
+          predicates:
+            # 访问网关项目的路径中报站 edu或者user的一层路径 则由当前路由处理请求
+            # 路由将请求转发到8110服务器处理(http://localhost:9110/xxx/edu/xxx => http://localhost:8110/xxx/edu/xxx )
+            - Path=/**/edu/**,/user/**
+        # -表示创建一个集合中的元素
+        - id: service-ucenter
+          # uri表示目标服务器地址：
+          uri: lb://guli-ucenter
+          predicates:
+            # 访问网关项目的路径中报站 edu或者user的一层路径 则由当前路由处理请求
+            # 路由将请求转发到8110服务器处理(http://localhost:9110/xxx/edu/xxx => http://localhost:8110/xxx/edu/xxx )
+            - Path=/**/ucenter/**
+        - id: service-oss
+          uri: lb://guli-oss
+          predicates:
+            - Path=/*/oss/**
+        - id: service-vod
+          uri: lb://guli-vod
+          predicates:
+            - Path=/*/vod/**
+        - id: guli-cms
+          uri: lb://guli-cms
+          predicates:
+            - Path=/*/cms/**
+        - id: service-sms
+          uri: lb://guli-sms
+          predicates:
+            - Path=/*/sms/**
+        - id: service-trade
+          uri: lb://guli-trade
+          predicates:
+            - Path=/*/trade/**
+        - id: service-statistics
+          uri: lb://guli-statistics
+          predicates:
+            - Path=/*/statistics/**
+
+
+  profiles:
+    active: dev

@@ -1,5 +1,6 @@
 package com.atguigu.guli.service.edu.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.atguigu.guli.service.base.model.BaseEntity;
@@ -8,6 +9,9 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>
@@ -34,5 +38,8 @@ public class Subject extends BaseEntity {
     @ApiModelProperty(value = "排序字段")
     private Integer sort;
 
+    //添加二级分类集合属性
+    @TableField(exist = false)//表示该字段不是数据库表中的字段
+    private List<Subject> children;
 
 }

@@ -9,6 +9,54 @@ spring:
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
+  profiles:
+    # 如果不配置 logback-spring.xml中的  dev的日志配置不能生效
+    active: dev
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+        ip: 127.0.0.1   # edu服务运行的服务器ip 注册到注册中心显示的ip
+  redis:
+    host: 192.168.1.170
+    port: 6379
+  rabbitmq:
+    username: admin
+    password: admin
+    host: 192.168.1.170
+    virtual-host: /admin
+    listener:
+      simple:
+        # 启用能者多劳模式
+        prefetch: 3
+        concurrency: 5
+        acknowledge-mode: manual
+#      direct:
+#        acknowledge-mode: manual  # 手动ack：消息消费后需要手动确认消费
+      type: simple  # 使用接收请求的线程进行ack  不使用额外的线程池来处理
+#    database: 0
+#    password:
 #    name:
 server:
   port: 8110
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath*:com/atguigu/guli/service/edu/mapper/xml/*.xml
+logging:
+  level:
+    root: info #  配置当前项目全局日志输出级别
+    # 指定包 或者指定类的日志输出级别
+    com.atguigu.guli.service.edu.controller.admin.AdminTeacherController: debug
+    com.atguigu.guli.service.edu.feign.OssClient: debug
+ribbon:
+  # 超时配置：
+  ConnectTimeout: 5000
+  ReadTimeout: 5000
+# 重试次数配置：
+  MaxAutoRetries: 0 # 同一实例最大重试次数，不包括首次调用，默认0
+  MaxAutoRetriesNextServer: 1 # 重试其他实例的最大重试次数，不包括首次所选的server，默认1
+feign:
+  sentinel:
+    enabled: true   # 启用feign对sentinel的支持。本质就是sentinel使用动态代理 代理feign客户端

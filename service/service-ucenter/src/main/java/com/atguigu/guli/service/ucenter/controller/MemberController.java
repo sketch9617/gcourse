@@ -1,4 +1,4 @@
-package com.atguigu.guli.service.edu.controller;
+package com.atguigu.guli.service.ucenter.controller;
 
 
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -7,15 +7,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <p>
- * 课程 前端控制器
+ * 会员表 前端控制器
  * </p>
  *
  * @author atguigu
- * @since 2022-07-16
+ * @since 2022-08-01
  */
 @RestController
-@RequestMapping("/edu/course")
-public class CourseController {
+@RequestMapping("/ucenter/member")
+public class MemberController {
 
 }
 

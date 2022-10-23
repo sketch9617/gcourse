@@ -1,5 +1,6 @@
 package com.atguigu.guli.service.edu.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.atguigu.guli.service.base.model.BaseEntity;
@@ -8,6 +9,8 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import java.util.List;
 
 /**
  * <p>
@@ -33,6 +36,6 @@ public class Chapter extends BaseEntity {
 
     @ApiModelProperty(value = "显示排序")
     private Integer sort;
-
-
+    @TableField(exist = false)
+    private List<Video> videos;
 }

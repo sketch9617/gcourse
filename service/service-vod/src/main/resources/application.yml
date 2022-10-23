@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: guli-vod
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  #
+  profiles:
+    # 如果不配置 logback-spring.xml中的  dev的日志配置不能生效
+    active: dev
+  servlet:
+    multipart:
+      max-file-size: 200MB   # 一次请求单个表单项上传的文件大小限制
+      max-request-size: 200MB  # 一次请求多个表单项上传文件总大小限制
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+  redis:
+    host: 192.168.1.170
+    port: 6379
+#        namespace:
+#    name:
+server:
+  port: 8130
+aliyun:
+  vod:
+    accessKeyId: LTAI5tDaEmk7jmQwbvpDgQeS
+    accessKeySecret: Tlvngst9OxoXRSDq4iWAjapnk2BXPp
+    workFlowId: 2ca20bda021ea3d886926c3fbf7af6b7
+    regionId: cn-shanghai
+

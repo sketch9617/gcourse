@@ -6,6 +6,7 @@
     <modules>
         <module>common</module>
         <module>service</module>
+        <module>infrastructure</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -54,11 +55,11 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-<!--    如果依赖爆红：
-            dependencyManagement管理的依赖不会触发maven自动下载
+    <!--    如果依赖爆红：
+                dependencyManagement管理的依赖不会触发maven自动下载
 
 
-  -->
+      -->
     <dependencyManagement>
         <dependencies>
             <!--Spring Cloud-->
@@ -78,6 +79,7 @@
                 <scope>import</scope>
             </dependency>
 
+
             <!--mybatis-plus 持久层-->
             <dependency>
                 <groupId>com.baomidou</groupId>
@@ -88,7 +90,14 @@
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-generator</artifactId>
                 <version>3.4.0</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>com.baomidou</groupId>
+                        <artifactId>mybatis-plus-extension</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
+            <!--            排除 mybatis-plus-generator引入了旧版本的extension依赖 -->
 
             <!-- velocity 模板引擎, Mybatis Plus 代码生成器需要 -->
             <dependency>
@@ -214,9 +223,6 @@
 
         </dependencies>
     </dependencyManagement>
-
-
-
 
 
 </project>
